@@ -1,6 +1,6 @@
 package com.javapractice;
 import java.util.LinkedList;
-import static org.junit.jupiter.api.Assertions.*;
+
 
 public class MyMapNode <K,V>implements INode<K>{
     K key;
