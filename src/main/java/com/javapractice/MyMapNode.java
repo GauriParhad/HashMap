@@ -1,4 +1,5 @@
 package com.javapractice;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 
@@ -46,5 +47,33 @@ public class MyMapNode <K,V>implements INode<K>{
                 this.myLinkedList=new LinkedList<>();
             }
         }
+    }
+    public class LinkedHashMap<K,V>{
+        private final int numBucket;
+        ArrayList<LinkedList<K>> myBucketArray;
+
+
+        public LinkedHashMap(){
+        this.numBucket=10;
+        this.myBucketArray=new ArrayList<>(numBucket);
+        for(int i =0; i <numBucket; i++)
+            this.myBucketArray.add(null);
+        }
+        private int getBucketIndex(K key)
+        {
+            int hashcode =Math.abs(key.hashCode());
+            int index = hashcode%numBucket;
+            return index;
+        }
+        public V get (K key)
+        {
+            int index =this.getBucketIndex(key);
+            LinkedList<K> myLinkedList=this.myBucketArray.get(index);
+            if(myLinkedList==null)
+                return null;
+            MyMapNode<K,V> myMapNode=(MyMapNode<K, V>) myLinkedList.search(key);
+            return (myMapNode==null) ? null:myMapNode.getValue();
+        }
+
     }
 }
